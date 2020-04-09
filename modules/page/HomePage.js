@@ -30,7 +30,8 @@ class HomePage extends AppPage {
   }
 
   get language(){
-    return $('//span[contains(text(),"Language")]');
+   // return $('//span[contains(text(),"Language")]');
+    return $('//li[@id="nav-menu-item-6200"]//span[@class="item_text"][contains(text(),"Language")]');
   }
 
   open() {

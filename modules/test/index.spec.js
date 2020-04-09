@@ -2,9 +2,10 @@ import {expect} from 'chai';
 //import AppPage from "../page/AppPage";
 import HomePage from "../page/HomePage";
 
-describe('HOMEPAGE', () => {
+describe('HOME_PAGE', () => {
   it('should open the homepage', () => {
     HomePage.open();
+    browser.maximizeWindow();
   });
 
   it('should check the logo Evolvice is exists', () => {
