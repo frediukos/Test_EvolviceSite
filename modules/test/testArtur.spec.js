@@ -1,6 +1,6 @@
-import axios from 'axios';
+//import axios from 'axios';
 import {expect} from 'chai';
-import TestArtur from "../page/TestArtur";
+//import TestArtur from "../page/TestArtur";
 
 describe('DOCTOR SEARCH', () => {
   before('should open docdoc.ru/doctor', () => {
@@ -44,12 +44,34 @@ describe('DOCTOR SEARCH', () => {
   });
 
   it('should verify that displayed all doctors work on selected date', () => {
-    const allDoctors = browser.$$('//div[@data-test-id="doctor-card-search-results"]');
-    for (let i = 1; i <= allDoctors.length; i++){
-      const timeSlotsCount = $$('//div[@data-test-id="doctor-card-search-results"][${i}]//button[@data-ga-action="clickTable"]').length;
-      expect(timeSlotsCount).to.be.above(0);
-    }
+      const scheduleText = $('//div[@class="doctor-slots__caption"]/span');
+      const allDoctors = browser.$$('//div[@data-test-id="doctor-card-search-results"]');
+      for (let i = 1; i <= allDoctors.length; i++) {
+        const timeSlotsCount = $$(`(//div[@data-test-id="doctor-card-search-results"])[${i}]//button[@data-ga-action="clickTable"]`).length;
+        if (timeSlotsCount > 0) {
+          expect(scheduleText.getText()).to.include('Онлайн-расписание на 11 апреля');
+        }
+      }
   });
   browser.pause(70000);
+
+
+  // it('should verify that displayed all doctors work on selected date', () => {
+  //   const allDoctors = browser.$$('//div[@data-test-id="doctor-card-search-results"]');
+  //   for (let i = 1; i <= allDoctors.length; i++){
+  //     const timeSlotsCount = $$(`(//div[@data-test-id="doctor-card-search-results"])[${i}]//button[@data-ga-action="clickTable"]`).length;
+  //     const timeSlotsInOtherClinic = browser.$('//div[@class="doctor-slots__clinics-text"]');
+  //     if (timeSlotsCount > 0) {
+  //       console.log('time is available');//expect(timeSlotsInOtherClinic.getText()).eq('Врач принимает в нескольких клиниках');
+  //     }
+  //     else
+  //     {
+  //       expect(timeSlotsInOtherClinic.getText()).eq('Врач принимает в нескольких клиниках');
+  //     }
+  //   }
+  // });
+  // browser.pause(70000);
+
+
 
 });
